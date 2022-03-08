@@ -1,0 +1,184 @@
+/* purgecss start ignore */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+/* purgecss end ignore */
+@import 'tailwindcss/utilities';
+
+@font-face {
+  font-family: 'Rubik';
+  font-weight: 400;
+  src: url('../fonts/Rubik-VariableFont_wght.ttf');
+}
+
+@layer base {
+  :root{
+    --color-primary: 13,13,43;
+    --color-primary-hover: 113,113,143;
+    --color-on-primary: 255,255,255;
+    --color-on-primary-hover: 222, 222, 222;
+
+    --color-accent: 54, 113, 233;
+    --color-accent-hover: 74, 133, 253;
+
+    --color-success:101,187,148;
+    --color-warning:255,152,0;
+    --color-danger:215, 50, 50;
+
+    --color-surface: 255, 255, 255;
+    --color-surface-secondary: 250, 251, 255;
+    --color-on-surface: 0,0,0;
+
+    --color-background: 248, 249, 251;
+    --color-background-secondary: 43,7,110;
+    
+    --color-paragraph: 0, 0, 0;
+    --color-paragraph-variant: 50, 50, 50;
+  }
+
+  .dark{
+    --color-primary: 255,255,255;
+    --color-primary-hover: 200,200,200;
+    --color-on-primary: 0,0,0;
+    --color-on-primary-hover: 20, 20, 20;
+
+    --color-accent: 54, 113, 233;
+    --color-accent-hover: 74, 133, 253;
+
+    --color-success:101,187,148;
+    --color-warning:255,152,0;
+    --color-danger:212, 88, 91;
+
+    --color-surface: 50, 50, 50;
+    --color-on-surface: 255,255,255;
+
+    --color-background: 0, 0, 0;
+    --color-background-secondary: 250, 251, 255;
+    
+    --color-paragraph: 255, 255, 255;
+    --color-paragraph-variant: 255, 255, 255;
+  }
+}
+
+@layer utilities {
+  .font-thin {
+      font-variation-settings: 'wght' 100;
+  }
+  .font-extralight {
+      font-variation-settings: 'wght' 200;
+  }
+  .font-light {
+      font-variation-settings: 'wght' 300;
+  }
+  .font-normal {
+      font-variation-settings: 'wght' 400;
+  }
+  .font-medium {
+      font-variation-settings: 'wght' 500;
+  }
+  .font-semibold {
+      font-variation-settings: 'wght' 600;
+  }
+  .font-bold {
+      font-variation-settings: 'wght' 700;
+  }
+  .font-extrabold {
+      font-variation-settings: 'wght' 800;
+  }
+  .font-black {
+      font-variation-settings: 'wght' 900;
+  }
+}
+
+
+/* purgecss start ignore */
+.page-enter-active, .page-leave-active {
+  transition: opacity .3s;
+  transition-timing-function: ease-in-out;
+}
+.page-enter, .page-leave-to {
+  opacity: 0;
+}
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+  -ms-overflow-style: none;/* IE and Edge */
+  scrollbar-width: none;/* Firefox */
+}
+
+/************
+*           *
+*  Custom   *
+*           *
+************/
+html,
+body{
+   @apply bg-background text-paragraph;
+}
+.page-x-offset{
+  @apply px-4 2xl:px-0
+}
+
+.clickable{
+  @apply transition;
+  @apply ease-in-out;
+  @apply duration-500;
+  @apply cursor-pointer;
+}
+.label{
+  @apply text-sm;
+  @apply font-semibold capitalize tracking-wide;
+}
+.input{
+@apply rounded;
+@apply bg-surface;
+@apply text-on-surface;
+@apply px-4 py-2;
+}
+.input:focus,input:focus,select:focus,button:focus,.clickable:focus{
+  @apply outline-none;
+}
+.backdrop-blur {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+.template-toast {
+  @apply justify-end items-end space-y-4;
+  z-index: -1!important;
+}
+.template-toast > div {
+ @apply max-w-max;
+}
+.template-toast .w-0 {
+  @apply min-w-max w-full;
+}
+.template-toast .flex.items-start {
+  @apply space-x-2;
+}
+
+.template-toast .text-green-300,
+.template-toast .text-green-400 {
+  @apply text-success;
+}
+.template-toast .border-green-200{
+  @apply border-success;
+}
+
+.template-toast .text-red-300,
+.template-toast .text-red-400 {
+  @apply text-danger;
+}
+.template-toast .border-red-200{
+  @apply border-danger;
+}
+
+.template-toast .text-yellow-300,
+.template-toast .text-yellow-400 {
+  @apply text-warning;
+}
+.template-toast .border-yellow-200{
+  @apply border-warning;
+}

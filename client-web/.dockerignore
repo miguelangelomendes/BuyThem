@@ -1,0 +1,43 @@
+# The .dockerignore file excludes files from the container build process.
+#
+# https://docs.docker.com/engine/reference/builder/#dockerignore-file
+
+# Exclude locally vendored dependencies.
+vendor/
+
+# Exclude "build-time" ignore files.
+.dockerignore
+.gcloudignore
+
+# Docker
+Dockerfile
+docker-volumes
+
+# Exclude git history and configuration.
+.gitignore
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Local files
+.env
+.idea
+.vscode
+.prettierrc
+.nuxt
+
+# Node
+e2e
+test
+dist
+coverage
+node_modules
+nestfirestore.json
+npm-debug.log
+npm-debug.log.*
+
+# Misc
+README.md
