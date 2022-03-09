@@ -77,14 +77,7 @@ export default {
     },
   },
   publicRuntimeConfig: {
-    axios: {
-      browserBaseURL: process.env.API_URL || 'http://localhost:8080/v1/'
-    },
-  },
-  // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {
-    baseURL: process.env.API_URL,
-    // withCredentials: true
+    contractName: process.env.CONTRACT_NAME,
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)

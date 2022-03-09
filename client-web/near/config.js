@@ -1,6 +1,10 @@
-const CONTRACT_NAME = process.env.CONTRACT_NAME || 'dev-1646773716522-74365831997758';
+const CONTRACT_NAME = process.env.CONTRACT_NAME || "miguelmendes.testnet"
+console.log("CONTRACT_NAME", CONTRACT_NAME)
 
 function getConfig(env) {
+  if (typeof CONTRACT_NAME === 'undefined') {
+    throw Error('CONTRACT_NAME not defined')
+  }
   switch (env) {
     case 'mainnet':
       return {

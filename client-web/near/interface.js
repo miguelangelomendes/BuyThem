@@ -1,11 +1,6 @@
 import * as nearAPI from 'near-api-js';
 import getConfig from './config'
 import Big from "big.js";
-// Import globaly as react-scripts 5.0.0 don't allow poly
-global.Buffer = global.Buffer || require('buffer').Buffer
-
-const viewMethods = process.env.VIEW_METHODS || []
-const changeMethods = process.env.CHANGE_METHODS || []
 
 const nearConfig = getConfig(process.env.NODE_ENV || 'testnet')
 let contract = null
@@ -24,8 +19,8 @@ export async function initContract() {
   }
 
   contract = new nearAPI.Contract(walletConnection.account(), nearConfig.contractName, {
-    viewMethods: ["get_items", "get_purchases"],
-    changeMethods: ["create_item", "purchase_item", "get_purchased_items", "get_owned_items"],
+    viewMethods: ["get_items", "get_purchased_items","get_owned_items"],
+    changeMethods: ["create_item", "purchase_item"],
     sender: walletConnection.getAccountId()
   });
 
@@ -94,8 +89,14 @@ export async function getOwnedItems() {
   if (!currentUser) {
     throw Error('User not logged in')
   }
-  const items = await contract.get_owned_items({ account_id: currentUser.accountId })
-  return items
+  try {
+console.log("currentUser.accountId", currentUser.accountId)
+    const items = await contract.get_owned_items({ account_id: currentUser.accountId.toString() })
+    console.log("AQUI!!!!!!!!!!!!")
+    return items
+  } catch (error) {
+    console.log("error", error)
+  }
 
 }
 export async function getPruchases() {

@@ -31,7 +31,7 @@ export const actions = {
 			commit('SET_LIST', result)
 			return result
 		} catch (error) {
-			console.error("Profiles list error", error)
+			console.error("Purchases list error", error)
 			throw error
 		}
 	},

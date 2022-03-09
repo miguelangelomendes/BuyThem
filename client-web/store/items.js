@@ -53,16 +53,17 @@ export const actions = {
 	async owned({ commit, dispatch }) {
 		try {
 			const result = await near.getOwnedItems()
-			if (result ) {
-				result.forEach(item => {
-					commit('ADD_OR_UPDATE_ITEM_ON_LIST', item)
-				})
+			console.log("owned", result)
+			// if (result ) {
+			// 	result.forEach(item => {
+			// 		commit('ADD_OR_UPDATE_ITEM_ON_LIST', item)
+			// 	})
 
-				dispatch("setOwned")
-			}
+			// 	dispatch("setOwned")
+			// }
 			return result
 		} catch (error) {
-			console.error("Profiles list error", error)
+			console.error("Items Owned list error", error)
 			throw error
 		}
 	},
@@ -95,7 +96,7 @@ export const actions = {
 			}
 			return item
 		} catch (error) {
-			console.error("Profiles list error", error)
+			console.error("Update media error", error)
 			throw error
 		}
 	},
@@ -108,7 +109,7 @@ export const actions = {
 			}
 			return item
 		} catch (error) {
-			console.error("Profiles list error", error)
+			console.error("Update by uri error", error)
 			throw error
 		}
 	},

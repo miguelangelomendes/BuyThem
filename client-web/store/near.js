@@ -39,6 +39,7 @@ export const actions = {
     try {
       commit('SET_LOADING', true)
       const { contract, currentUser, nearConfig, walletConnection } = await near.initContract()
+      console.log({ contract, currentUser, nearConfig, walletConnection })
       commit('SET_CONTRACT', contract)
       commit('SET_USER', currentUser)
       commit('SET_CONFIG', nearConfig)

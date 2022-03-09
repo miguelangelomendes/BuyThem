@@ -21,7 +21,7 @@ const auth =
 const algorithm = 'aes-256-ctr';
 
 // Defining key
-const key = Buffer.from(scryptSync(config.ENCRYPTION_IV.toString(), 'salt', 32))
+const key = Buffer.from(scryptSync(config.ENCRYPTION_KEY.toString(), 'salt', 32))
 
 // Defining iv
 const iv = Buffer.from(config.ENCRYPTION_IV.toString());
