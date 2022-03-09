@@ -1,6 +1,5 @@
 <template>
   <div class="">
-    <Logo class="w-20 lg:w-28 clickable text-primary" @click="navigateTop" />
     <div
       class="
         flex flex-col
@@ -10,9 +9,9 @@
         items-center
       "
     >
-      <a class="text-xxs lg:text-sm" href="https://ley.pt" target="_blank">
+      <p class="text-xxs lg:text-sm">
         {{ $t("footer.copyright") }}
-      </a>
+      </p>
     </div>
   </div>
 </template>

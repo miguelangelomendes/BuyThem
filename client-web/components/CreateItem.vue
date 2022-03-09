@@ -57,8 +57,8 @@
         "
       >
         <button
-          :disabled="!isFormValid"
-          :class="isPending ? 'animate-bounce' : ''"
+          :disabled="!isFormValid || isPending"
+          :class="isPending ? 'animate-bounce cursor-not-allowed' : ''"
           class="
             w-40
             bg-primary

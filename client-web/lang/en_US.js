@@ -2,6 +2,7 @@ export default {
 	language: "english",
 	wip: "Work in progress",
 	menu: {
+		home: "Home",
 		purchases: "Purchases",
 		profile: "Profile",
 	},
@@ -13,6 +14,6 @@ export default {
 		return_home: "Return to home",
 	},
 	footer: {
-		copyright: "Designed and developed by Miguel Mendes | Copyright © 2020 | miguelmendes.near",
+		copyright: "by Miguel Mendes | miguelmendes.near | Powered by NEAR and IPFS",
 	}
 }

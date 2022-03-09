@@ -53,10 +53,9 @@ export const actions = {
   },
   async login({ commit }) {
     try {
-      commit('SET_SESSION_LOADING', true)
       const result = await near.login()
       commit('SET_IS_LOGGED_IN', walletConnection.isSingnedIn())
-      commit('SET_SESSION_LOADING', false)
+      return result
     } catch (err) {
       console.log('Contract init error: ', err)
       commit('SET_SESSION_LOADING', false)

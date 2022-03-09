@@ -13,6 +13,9 @@ export const mutations = {
 		if (newItem) {
 			const index = state.list.findIndex(item => item.id === newItem.id)
 			if (index >= 0) {
+				if (state.list[index].media) {
+					newItem.media = state.list[index].media
+				}
 				state.list.splice(index, 1, newItem);
 			} else {
 				state.list.push(newItem)
@@ -28,6 +31,15 @@ export const actions = {
 	async list({ commit }) {
 		try {
 			const result = await near.getPruchases()
+			if (this.state.items.list.length === 0) {
+				commit('SET_LIST', result)
+			} else {
+				if (result) {
+					result.forEach(item => {
+						commit('ADD_TO_LIST', item)
+					})
+				}
+			}
 			commit('SET_LIST', result)
 			return result
 		} catch (error) {

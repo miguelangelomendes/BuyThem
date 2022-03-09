@@ -3,12 +3,9 @@
     <div v-for="link in menu" :key="link.title">
       <nuxt-link
         :to="link.to"
-        class="
-          clickable
-          capitalize
-        "
+        class="clickable capitalize"
         :class="
-          $route.path.startsWith(link.to)
+          $route.name === link.name
             ? 'text-primary underline'
             : 'text-on-surface hover:text-primary-hover'
         "

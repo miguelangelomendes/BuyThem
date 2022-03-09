@@ -92,6 +92,7 @@ export const actions = {
 			if (item) {
 				item.media = params.media
 				commit('ADD_OR_UPDATE_ITEM_ON_LIST', item)
+				commit('purchases/ADD_TO_LIST', item, { root: true })
 			}
 			return item
 		} catch (error) {
