@@ -9,10 +9,6 @@
 export default {
   auth: false,
   fetchOnServer: false,
-  mounted() {
-    console.log("mounted is_loading", this.$store.state.near.is_loading);
-    console.log("mounted", this.$store.state.near.is_logged_in);
-  },
   async fetch() {
     await this.$store.dispatch("items/list");
   },

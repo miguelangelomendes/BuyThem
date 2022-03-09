@@ -53,14 +53,13 @@ export const actions = {
 	async owned({ commit, dispatch }) {
 		try {
 			const result = await near.getOwnedItems()
-			console.log("owned", result)
-			// if (result ) {
-			// 	result.forEach(item => {
-			// 		commit('ADD_OR_UPDATE_ITEM_ON_LIST', item)
-			// 	})
+			if (result ) {
+				result.forEach(item => {
+					commit('ADD_OR_UPDATE_ITEM_ON_LIST', item)
+				})
 
-			// 	dispatch("setOwned")
-			// }
+				dispatch("setOwned")
+			}
 			return result
 		} catch (error) {
 			console.error("Items Owned list error", error)

@@ -38,7 +38,6 @@ export const actions = {
 	async buyItem({ commit }, item) {
 		try {
 			const result = await near.buyItem(item.id, item.price.toString())
-			console.log("buyItem", result)
 			commit('ADD_TO_LIST', result)
 			commit('items/ADD_OR_UPDATE_ITEM_ON_LIST', result, { root: true })
 			return result
