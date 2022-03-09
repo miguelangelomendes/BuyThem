@@ -79,6 +79,9 @@ export default {
   publicRuntimeConfig: {
     contractName: process.env.CONTRACT_NAME,
   },
+  privateRuntimeConfig: {
+    projectId: process.env.PROJECT_ID,
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
