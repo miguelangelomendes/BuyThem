@@ -2,7 +2,7 @@ import * as near from '../near/interface'
 
 export const state = () => ({
 	list: [],
-	owned: [],
+	own: [],
 	detail: null,
 })
 
@@ -10,8 +10,8 @@ export const mutations = {
 	SET_LIST(state, newList) {
 		state.list = newList ? newList : []
 	},
-	SET_OWNED(state, newList) {
-		state.owned = newList ? newList : []
+	SET_OWN(state, newList) {
+		state.own = newList ? newList : []
 	},
 	ADD_OR_UPDATE_ITEM_ON_LIST(state, newItem) {
 		if (newItem) {
@@ -22,7 +22,7 @@ export const mutations = {
 				}
 				state.list.splice(index, 1, newItem);
 			} else {
-				state.list.push(newItem)
+				state.list.unshift(newItem)
 			}
 		}
 	},
@@ -50,28 +50,28 @@ export const actions = {
 			throw error
 		}
 	},
-	async owned({ commit, dispatch }) {
+	async own({ commit, dispatch }) {
 		try {
-			const result = await near.getOwnedItems()
+			const result = await near.getOwnItems()
 			if (result ) {
 				result.forEach(item => {
 					commit('ADD_OR_UPDATE_ITEM_ON_LIST', item)
 				})
 
-				dispatch("setOwned")
+				dispatch("setOwn")
 			}
 			return result
 		} catch (error) {
-			console.error("Items Owned list error", error)
+			console.error("Items Own list error", error)
 			throw error
 		}
 	},
-	async setOwned({ commit }, id) {
+	async setOwn({ commit }, id) {
 		try {
 			const user_id = await near.getUserId()
-			commit('SET_OWNED', this.state.items.list.filter(item => item.owner_account_id === user_id))
+			commit('SET_OWN', this.state.items.list.filter(item => item.owner_account_id === user_id))
 		} catch (error) {
-			console.error("Items setOwned error", error)
+			console.error("Items setOwn error", error)
 			throw error
 		}
 	},
@@ -79,7 +79,7 @@ export const actions = {
 		try {
 			const result = await near.createItem(item)
 			commit('ADD_OR_UPDATE_ITEM_ON_LIST', result)
-			dispatch("setOwned")
+			dispatch("setOwn")
 			return item
 		} catch (error) {
 			console.error("Profiles create error", error)

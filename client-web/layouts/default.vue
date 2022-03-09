@@ -31,7 +31,7 @@
       :class="isNavBarElevated ? 'shadow' : 'shadow-none'"
     >
       <div class="relative flex items-center h-full">
-        <TopBar id="topBar" class="w-full max-w-screen-2xl mx-auto" />
+        <TopBar id="topBar" class="w-full max-w-screen-2xl mx-auto px-4 2xl:px-0" />
       </div>
     </div>
     <div>

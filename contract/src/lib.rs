@@ -49,11 +49,11 @@ impl Contract {
             .collect()
     }
 
-    pub fn get_owned_items(&self, account_id: AccountId) -> Vec<Item> {
+    pub fn get_own_items(&self, account_id: AccountId) -> Vec<Item> {
         let items = &self.album;
         items
             .iter()
-            .filter(|item| item.get_owned(&account_id).is_some())
+            .filter(|item| item.get_own(&account_id).is_some())
             .cloned()
             .collect()
     }
@@ -68,6 +68,10 @@ impl Contract {
             .expect("Item not found");
         if &account_id == item.owner_account_id() {
             panic!("You own this item");
+        }
+        let purchases = self.get_purchases(&account_id).unwrap_or_default();
+        if purchases.contains(&item.id()) {
+            panic!("You already purchased this item");
         }
         let price = item.price();
         let payment = near_sdk::env::attached_deposit();
@@ -103,17 +107,16 @@ impl Contract {
     pub fn transfer_funds(&mut self, account_id: &AccountId, amount: u128) -> Promise {
         Promise::new(account_id.clone()).transfer(amount)
     }
+
     #[private]
     pub fn get_purchases(&self, account_id: &AccountId) -> Option<Vec<u64>> {
         self.purchases.get(account_id)
     }
 }
 
-/*****
+/**
  *
- *
- *                  TESTS
- *
+ * TESTS
  *
  */
 
@@ -125,9 +128,11 @@ mod tests {
     fn contract_deployer() -> AccountId {
         return AccountId::new_unchecked("contract_deployer.testnet".to_string());
     }
+
     fn owner_account_id() -> AccountId {
         return AccountId::new_unchecked("alice.testnet".to_string());
     }
+
     fn buyer_account_id() -> AccountId {
         return AccountId::new_unchecked("john.testnet".to_string());
     }
@@ -203,6 +208,7 @@ mod tests {
         let _purchased_item = &contract.purchase_item(1);
         // Should panic - Not enough funds {deposit} to pay {item.price}
     }
+
     #[test]
     #[should_panic]
     fn test_purchase_onwed_item() {
@@ -219,6 +225,7 @@ mod tests {
         contract.purchase_item(item.id());
         // Should panic - You own this item
     }
+
     #[test]
     #[should_panic]
     fn test_purchase_non_item() {
@@ -238,6 +245,26 @@ mod tests {
 
         contract.purchase_item(999);
         // Should panic - Item not found
+    }
+
+    #[test]
+    #[should_panic]
+    fn test_purchase_item_twice() {
+        let item_price = U128(10);
+        let context = get_context(&owner_account_id(), Some(item_price.0));
+        testing_env!(context.build());
+
+        let mut contract = Contract::default();
+        let item = &contract.create_item(
+            item_price,
+            "QmTxeBMGxE8hkkMEMjpwjd3Yv5jA1mcF3GUpRW5v8cgvxW".to_string(),
+            None,
+        );
+        let context = get_context(&buyer_account_id(), Some(item_price.0));
+        testing_env!(context.build());
+        contract.purchase_item(item.id());
+        let _purchased_item = contract.purchase_item(item.id());
+        // Should panic - You can't purchase the same item twice
     }
 
     #[test]
