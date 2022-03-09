@@ -1,28 +1,18 @@
 import { createCipheriv, createDecipheriv, scryptSync } from 'crypto';
-// import * as dotenv from 'dotenv';
-// const config = dotenv.config().parsed;
 const ipfsClient = require('ipfs-http-client')
-
-//const bodyParser = require('body-parser')
 const express = require("express");
-var bodyParser = require('body-parser')
 const app = express();
-app.use(express.json());
 const multer = require("multer");
 const upload = multer({
   limits: { fieldSize: 25 * 1024 * 1024 }
 });
+app.use(express.json());
 
 const auth =
   'Basic ' + Buffer.from(process.env.PROJECT_ID.toString() + ':' + process.env.PROJECT_SECRET.toString()).toString('base64');
 
-// Defining algorithm
 const algorithm = 'aes-256-ctr';
-
-// Defining key
 const key = Buffer.from(scryptSync(process.env.ENCRYPTION_KEY.toString(), 'salt', 32))
-
-// Defining iv
 const iv = Buffer.from(process.env.ENCRYPTION_IV.toString());
 
 function encrypt(input) {
