@@ -28,7 +28,6 @@ async function uploadToIPFS(string) {
       authorization: auth,
     },
   });
-  console.log("client", client)
 
   return await client.add(string)
 }
@@ -51,7 +50,6 @@ function encrypt(input) {
 
 function decrypt(input) {
   const decipher = createDecipheriv(algorithm, key, iv);
-  console.log("decrypt", input)
   const decrpyted = Buffer.concat([
     decipher.update(Buffer.from(input, 'hex')),
     decipher.final(),
@@ -67,10 +65,8 @@ function fileToDataUrl(file) {
 
 app.post('/encrypt', upload.single("file"), async (req, res) => {
   try {
-    console.log("req.file", req.file)
     const encrypted = encrypt(fileToDataUrl(req.file))
     const uploaded = await uploadToIPFS(encrypted)
-    console.log("uploaded", uploaded)
     res.send(uploaded.cid.toString())
   } catch (error) {
     console.error("Error encrypt", error)
@@ -82,7 +78,6 @@ app.post('/encrypt', upload.single("file"), async (req, res) => {
 // app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 app.post('/decrypt', upload.single("data"), (req, res) => {
   try {
-    console.log("req.body", req.body.data)
     // res.send("cenas")
     const decrypted = decrypt(req.body.data)
     res.send(decrypted)

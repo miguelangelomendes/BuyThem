@@ -1,5 +1,4 @@
 const CONTRACT_NAME = process.env.CONTRACT_NAME || "miguelmendes.testnet"
-console.log("CONTRACT_NAME", CONTRACT_NAME)
 
 function getConfig(env) {
   if (typeof CONTRACT_NAME === 'undefined') {

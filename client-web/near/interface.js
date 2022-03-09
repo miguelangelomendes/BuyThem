@@ -19,7 +19,7 @@ export async function initContract() {
   }
 
   contract = new nearAPI.Contract(walletConnection.account(), nearConfig.contractName, {
-    viewMethods: ["get_items", "get_purchased_items","get_owned_items"],
+    viewMethods: ["get_items", "get_purchased_items", "get_owned_items"],
     changeMethods: ["create_item", "purchase_item"],
     sender: walletConnection.getAccountId()
   });
@@ -90,9 +90,7 @@ export async function getOwnedItems() {
     throw Error('User not logged in')
   }
   try {
-console.log("currentUser.accountId", currentUser.accountId)
     const items = await contract.get_owned_items({ account_id: currentUser.accountId.toString() })
-    console.log("AQUI!!!!!!!!!!!!")
     return items
   } catch (error) {
     console.log("error", error)
@@ -134,13 +132,11 @@ export async function buyItem(id, price) {
   if (!contract) {
     throw Error('Contract not initialized')
   }
-  console.log("before purchase")
   // Transform Near amount to Yocto
   const amount = nearAPI.utils.format.parseNearAmount(price.toString());
   const item = await contract.purchase_item(
     {
       id: id
     }, BOATLOAD_OF_GAS, amount)
-  console.log("item", item.uri)
   return item
 }

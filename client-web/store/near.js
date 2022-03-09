@@ -39,11 +39,9 @@ export const actions = {
     try {
       commit('SET_LOADING', true)
       const { contract, currentUser, nearConfig, walletConnection } = await near.initContract()
-      console.log({ contract, currentUser, nearConfig, walletConnection })
       commit('SET_CONTRACT', contract)
       commit('SET_USER', currentUser)
       commit('SET_CONFIG', nearConfig)
-      console.log("walletConnection.isSignedIn()", walletConnection.isSignedIn())
       commit('SET_IS_LOGGED_IN', walletConnection.isSignedIn())
 
       commit('SET_LOADING', false)
@@ -57,9 +55,8 @@ export const actions = {
     try {
       commit('SET_SESSION_LOADING', true)
       const result = await near.login()
-      console.log('Login result ', result)
-      // commit('SET_IS_LOGGED_IN', walletConnection.isSingnedIn())
-      // commit('SET_SESSION_LOADING', false)
+      commit('SET_IS_LOGGED_IN', walletConnection.isSingnedIn())
+      commit('SET_SESSION_LOADING', false)
     } catch (err) {
       console.log('Contract init error: ', err)
       commit('SET_SESSION_LOADING', false)
@@ -70,9 +67,8 @@ export const actions = {
     try {
       commit('SET_SESSION_LOADING', true)
       const result = await near.logout()
-      console.log('Logout result ', result)
       commit('SET_IS_LOGGED_IN', false)
-      // commit('SET_SESSION_LOADING', false)
+      commit('SET_SESSION_LOADING', false)
     } catch (err) {
       console.log('Contract init error: ', err)
       commit('SET_SESSION_LOADING', false)

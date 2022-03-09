@@ -76,9 +76,6 @@ export default {
       fallbackLocale: 'en',
     },
   },
-  publicRuntimeConfig: {
-    contractName: process.env.CONTRACT_NAME,
-  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

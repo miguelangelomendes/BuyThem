@@ -13,7 +13,11 @@
 
     <div class="space-y-5">
       <h2 class="text-xl font-bold tracking-wider text-primary">My Album</h2>
-      <AlbumList :list="$store.state.items.owned" />
+      <AlbumList
+        :list="$store.state.items.owned"
+        v-if="$store.state.items.owned.length > 0"
+      />
+      <p v-else>You haven't created any album yet.</p>
     </div>
   </div>
 </template>
