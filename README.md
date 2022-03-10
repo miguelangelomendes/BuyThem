@@ -1,7 +1,7 @@
 # BuyThem
 
 #### ❗️Alert
-May have a long inicial loading time due dockers sleep
+When first opening the webapp it might take a long time as the dev machines go to sleep.
 
 [Staging](https://buythem.onrender.com)
 
@@ -11,7 +11,7 @@ A platform built on NEAR Protocol and Nuxt.js where anyone can sell and buy imag
 
 Contract in `contract/src/lib.rs` provides methods to get items, purchases and own items, to create and purchase items.
 
-## How it work
+## How it works
 ### Sell
 - Create an Item with:
   - Description
