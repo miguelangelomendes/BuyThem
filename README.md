@@ -7,7 +7,8 @@ When first opening the webapp it might take a long time as the dev machines go t
 
 ## Description
 
-A platform built on NEAR Protocol and Nuxt.js where anyone can sell and buy images.
+A dApp built on the NEAR Protocol and IPFS with Nuxt.js
+Where anyone can buy and sell their images (not NFTs).
 
 Contract in `contract/src/lib.rs` provides methods to get items, purchases and own items, to create and purchase items.
 
@@ -17,7 +18,7 @@ Contract in `contract/src/lib.rs` provides methods to get items, purchases and o
   - Description
   - Price
   - Image
-- The system encrypts the image before uploading to IPFS and the Item is created and saved into state.
+- The image is first encrypted before being uploaded to IPFS. Saved into the contract state afterwards.
 - The contract charges a 10% fee on each purchase.
 - The creator receives 90% of each purchase.
 ### Buy
