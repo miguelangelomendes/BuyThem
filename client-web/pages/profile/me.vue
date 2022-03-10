@@ -1,10 +1,17 @@
 <template>
   <div class="space-y-10">
+    <div class="space-y-2">
     <h2 class="text-2xl font-bold tracking-wider text-primary">
       {{
         $store.state.near.user ? $store.state.near.user.accountId : "My Profile"
       }}
     </h2>
+    <p>
+      {{
+        $store.state.near.user ? $store.state.near.user.balance+' Ⓝ' : ""
+      }}
+    </p>
+  </div>
 <div class="w-full h-px bg-paragraph"/>
     <div class="space-y-5">
       <h2 class="text-xl font-bold tracking-wider text-primary">Create Item</h2>

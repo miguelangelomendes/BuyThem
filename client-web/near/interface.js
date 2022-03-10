@@ -15,7 +15,7 @@ export async function initContract() {
   walletConnection = new nearAPI.WalletConnection(near);
   if (walletConnection.getAccountId()) {
     const accountState = await walletConnection.account().state()
-    currentUser = { accountId: walletConnection.getAccountId(), balance: accountState.balance };
+    currentUser = { accountId: walletConnection.getAccountId(), balance: nearAPI.utils.format.formatNearAmount(accountState.amount.toString()) };
   }
 
   contract = new nearAPI.Contract(walletConnection.account(), nearConfig.contractName, {

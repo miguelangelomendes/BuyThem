@@ -18,7 +18,7 @@ export const mutations = {
 				}
 				state.list.splice(index, 1, newItem);
 			} else {
-				state.list.unshift(newItem)
+				state.list.push(newItem)
 			}
 		}
 	},
