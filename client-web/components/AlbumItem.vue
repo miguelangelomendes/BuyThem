@@ -125,6 +125,8 @@ export default {
     openMedia() {
       if (this.item.media) {
         this.isModalOpen = true;
+      } else {
+        console.log("no media");
       }
     },
     closeModal() {

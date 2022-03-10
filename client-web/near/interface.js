@@ -62,15 +62,10 @@ export async function getUserId() {
 
 /**
  * 
- *        Custom Methods
+ * Custom Methods
  * 
  */
 
-/***
- * 
- * VIEW METHODS
- * 
- */
 export async function getItems() {
   if (!contract) {
     throw Error('Contract not initialized')
@@ -108,11 +103,6 @@ export async function getPruchases() {
   return items
 }
 
-/***
- * 
- * CHANGE METHODS
- * 
- */
 const BOATLOAD_OF_GAS = Big(3).times(10 ** 13).toFixed();
 export async function createItem(item) {
   if (!contract) {

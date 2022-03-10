@@ -12,6 +12,15 @@ export default {
   async fetch() {
     await this.$store.dispatch("items/list");
   },
+  mounted() {
+    if (this.$route.query.transactionHashes) {
+      console.log(
+        "transactionHashes",
+        `https://explorer.testnet.near.org/transactions/${this.$route.query.transactionHashes}`
+      );
+      this.$router.replace("/")
+    }
+  },
 };
 </script>
 
