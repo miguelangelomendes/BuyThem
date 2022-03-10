@@ -14,8 +14,8 @@
     <div class="space-y-5">
       <h2 class="text-xl font-bold tracking-wider text-primary">My Album</h2>
       <AlbumList
-        :list="$store.state.items.owned"
-        v-if="$store.state.items.owned.length > 0"
+        :list="$store.state.items.own"
+        v-if="$store.state.items.own.length > 0"
       />
       <p v-else>You haven't created any album yet.</p>
     </div>
@@ -25,7 +25,7 @@
 <script>
 export default {
   async beforeCreate() {
-    await this.$store.dispatch("items/owned");
+    await this.$store.dispatch("items/own");
   },
 };
 </script>

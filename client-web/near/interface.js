@@ -19,7 +19,7 @@ export async function initContract() {
   }
 
   contract = new nearAPI.Contract(walletConnection.account(), nearConfig.contractName, {
-    viewMethods: ["get_items", "get_purchased_items", "get_owned_items"],
+    viewMethods: ["get_items", "get_purchased_items", "get_own_items"],
     changeMethods: ["create_item", "purchase_item"],
     sender: walletConnection.getAccountId()
   });
@@ -82,7 +82,7 @@ export async function getItems() {
   })
 }
 
-export async function getOwnedItems() {
+export async function getOwnItems() {
   if (!contract) {
     throw Error('Contract not initialized')
   }
@@ -90,7 +90,7 @@ export async function getOwnedItems() {
     throw Error('User not logged in')
   }
   try {
-    const items = await contract.get_owned_items({ account_id: currentUser.accountId.toString() })
+    const items = await contract.get_own_items({ account_id: currentUser.accountId.toString() })
     return items
   } catch (error) {
     console.log("error", error)

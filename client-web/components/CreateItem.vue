@@ -37,7 +37,13 @@
             (this.file && this.file.name) || "Click to pick or drop an image"
           }}
         </div>
-        <input v-show="false" ref="inputImage" type="file" @change="addFile" />
+        <input
+          accept="image/*"
+          v-show="false"
+          ref="inputImage"
+          type="file"
+          @change="addFile"
+        />
       </div>
       <div
         class="

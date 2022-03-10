@@ -20,9 +20,11 @@ impl Item {
         if uri.is_empty() {
             panic!("uri cannot be empty");
         }
+
         if price.0 == 0 {
-            panic!("price must be positive and bigger than 0");
+            panic!("price must be positive");
         }
+
         Item {
             id,
             price,
@@ -35,14 +37,16 @@ impl Item {
     pub fn id(&self) -> u64 {
         self.id
     }
+
     pub fn price(&self) -> U128 {
         self.price
     }
+
     pub fn owner_account_id(&self) -> &AccountId {
         &self.owner_account_id
     }
 
-    pub fn get_owned(&self, account_id: &AccountId) -> Option<Self> {
+    pub fn get_own(&self, account_id: &AccountId) -> Option<Self> {
         if account_id == &self.owner_account_id {
             Some(self.clone())
         } else {
@@ -57,7 +61,6 @@ impl Item {
             uri: if account_id_clone == self.owner_account_id
                 || purchases.unwrap_or_default().contains(&self.id)
             {
-                // uri: if account_id == self.owner_account_id || purchases.contains(&self.id) {
                 self.uri.clone()
             } else {
                 None
@@ -67,14 +70,11 @@ impl Item {
             owner_account_id: self.owner_account_id.clone(),
         }
     }
-
 }
 
-/*****
+/**
  *
- *
- *                  TESTS
- *
+ * TESTS
  *
  */
 
@@ -88,12 +88,14 @@ mod tests {
     fn owner_account_id() -> AccountId {
         return AccountId::new_unchecked("alice.testnet".to_string());
     }
+
     fn get_context(signer: &AccountId) -> VMContextBuilder {
         let mut builder = VMContextBuilder::new();
 
         builder.signer_account_id(signer.clone());
         builder
     }
+
     fn init_item() -> Item {
         Item::new(
             1,
@@ -102,6 +104,7 @@ mod tests {
             Some("This is a description".to_string()),
         )
     }
+
     #[test]
     #[should_panic]
     fn test_create_with_price_0() {
@@ -117,6 +120,7 @@ mod tests {
         );
         // Should panic - price cannot be 0
     }
+
     #[test]
     #[should_panic]
     fn test_create_with_empty_uri() {
@@ -132,6 +136,7 @@ mod tests {
         );
         // Should panic - uri cannot be empty
     }
+
     #[test]
     fn test_init_item() {
         // Acting as alice now owner_account_id
@@ -163,6 +168,7 @@ mod tests {
             "Item owner should be alice"
         );
     }
+
     #[test]
     fn test_get_id() {
         // Acting as alice now owner_account_id
@@ -173,6 +179,7 @@ mod tests {
         let item = init_item();
         assert_eq!(item.id(), 1, "Item id should be 1");
     }
+
     #[test]
     fn test_get_price() {
         // Acting as alice now owner_account_id
@@ -183,6 +190,7 @@ mod tests {
 
         assert_eq!(item.price(), U128::from(100), "Item price should be 100");
     }
+
     #[test]
     fn test_get_owner_account_id() {
         // Acting as alice now owner_account_id
@@ -198,18 +206,20 @@ mod tests {
             owner_account_id()
         );
     }
+
     #[test]
-    fn test_get_owned_some() {
+    fn test_get_own_some() {
         // Acting as alice now owner_account_id
         let context = get_context(&owner_account_id());
         testing_env!(context.build());
 
         let item = init_item();
-        let owned_item = item.get_owned(&owner_account_id());
-        assert!(owned_item.is_some(), "Should have some");
+        let own_item = item.get_own(&owner_account_id());
+        assert!(own_item.is_some(), "Should have some");
     }
+
     #[test]
-    fn test_get_owned_none() {
+    fn test_get_own_none() {
         // Acting as alice now owner_account_id
         let context = get_context(&owner_account_id());
         testing_env!(context.build());
@@ -217,9 +227,10 @@ mod tests {
         let item = init_item();
 
         let john = AccountId::new_unchecked("john.testnet".to_string());
-        let owned_item = item.get_owned(&john);
-        assert!(owned_item.is_none(), "Should have none");
+        let own_item = item.get_own(&john);
+        assert!(own_item.is_none(), "Should have none");
     }
+
     #[test]
     fn test_get_mapped_item_beeing_owner() {
         // Acting as alice now owner_account_id
@@ -234,6 +245,7 @@ mod tests {
             "Item uri should be QmTxeBMGxE8hkkMEMjpwjd3Yv5jA1mcF3GUpRW5v8cgvxW"
         );
     }
+
     #[test]
     fn test_get_mapped_item_already_purchased() {
         // Acting as alice now owner_account_id
@@ -249,6 +261,7 @@ mod tests {
             "Item uri should be QmTxeBMGxE8hkkMEMjpwjd3Yv5jA1mcF3GUpRW5v8cgvxW"
         );
     }
+
     #[test]
     fn test_get_mapped_item_not_purchased() {
         // Acting as alice now owner_account_id
