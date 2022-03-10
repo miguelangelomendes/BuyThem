@@ -1,4 +1,74 @@
 export default {
+  head: {
+    title: 'BuyThem',
+    titleTemplate: 'BuyThem - %s',
+    meta: [
+      { charset: 'utf-8' },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+  
+      {
+        hid: 'og:type',
+        property: 'og:type',
+        content: 'website'
+      },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'BuyThem'
+      },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content:
+        'A place where you can buy and sell photos.'
+      },
+     
+      // default
+      {
+        hid: 'title',
+        name: 'title',
+        content:
+          'BuyThem'
+      },
+      
+   
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+        'A place where you can buy and sell photos.'
+      },
+
+      // Twitter
+      // Test on: https://cards-dev.twitter.com/validator
+      {
+        hid: 'twitter:card',
+        name: 'twitter:card',
+        content: 'summary'
+      },
+      
+          {
+        hid: 'twitter:title',
+        name: 'twitter:title',
+        content: 'BuyThem'
+      },
+      {
+        hid: 'twitter:description',
+        name: 'twitter:description',
+        content:
+          'A place where you can buy and sell photos.'
+      },
+
+    ],
+    // canonical
+    link: [
+     
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+  },
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     '~/assets/css/tailwind.css'
